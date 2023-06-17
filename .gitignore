@@ -1,0 +1,8 @@
+.idea
+tf/.terraform
+tf/.terraform.lock.hcl
+tf/.terraform.tfstate.lock.info
+tf/terraform.tfstate
+tf/terraform.tfstate.backup
+tf/tfplan
+azuresql

@@ -1,0 +1,152 @@
+on:
+  push:
+    branches:
+      - main
+
+env:
+  AZ_RG_PREFIX: 'azsqldbt'
+  AZ_LOCATION: 'eastus'
+  AZ_RG_ID: '001'
+  AZ_STORAGE_PREFIX: 'storeacc'
+  AZ_CONTAINER_PREFIX: 'container'
+  ARM_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }}
+  ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+  ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+  ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+  ARM_SQLDB_PASSWORD: ${{ secrets.AZURE_SQLSERVER_PASSWORD }}
+
+jobs:
+  install-packages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: install Azure CLI
+        run: |
+          curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+      - name: Install Terraform
+        run: |
+          curl -sL https://releases.hashicorp.com/terraform/1.4.2/terraform_1.4.2_linux_amd64.zip -o terraform.zip
+          unzip terraform.zip
+          sudo mv terraform /usr/local/bin/
+
+  create-az-rg-and-storage:
+    needs: install-packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: create Azure resource group
+        run: |
+          az group create \
+            --name $AZ_RG_PREFIX-$AZ_RG_ID \
+            --location $AZ_LOCATION
+      - name: create Azure storage account
+        run: |
+          az storage account create \
+            --name $AZ_RG_PREFIX$AZ_STORAGE_PREFIX$AZ_RG_ID \
+            --resource-group $AZ_RG_PREFIX-$AZ_RG_ID \
+            --sku Standard_LRS \
+            --location $AZ_LOCATION
+      - name: create blob container for terraform
+        run: |
+          az storage container create \
+            --name $AZ_RG_PREFIX"tf"$AZ_RG_ID \
+            --account-name $AZ_RG_PREFIX$AZ_STORAGE_PREFIX$AZ_RG_ID
+      - name: create blob container for fake data
+        run: |
+          az storage container create \
+            --name $AZ_RG_PREFIX$AZ_CONTAINER_PREFIX$AZ_RG_ID \
+            --account-name $AZ_RG_PREFIX$AZ_STORAGE_PREFIX$AZ_RG_ID
+
+  check-for-access-keys-in-secrets:
+    needs: create-az-rg-and-storage
+    runs-on: ubuntu-latest
+    steps:
+      - name: checks that Azure blob storage key exists
+        run: |
+          if [ -z "${{ secrets.AZURE_STORAGE_KEY }}" ]; then
+            echo "Secret "AZURE_STORAGE_KEY" not found. Workflow will stop. Please create a secret called "AZURE_STORAGE_KEY" and store the Azure storage container's access key then run workflow again."
+            exit 1
+          else
+            echo "Secret "AZURE_STORAGE_KEY" found. Workflow will continue."
+          fi
+      - name: checks that Azure blob storage connection string exists
+        run: |
+          if [ -z "${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}" ]; then
+            echo "Secret "AZURE_STORAGE_CONNECTION_STRING" not found. Workflow will stop. Please create a secret called "AZURE_STORAGE_CONNECTION_STRING" and store the Azure storage container's connection string then run workflow again."
+            exit 1
+          else
+            echo "Secret "AZURE_STORAGE_CONNECTION_STRING" found. Workflow will continue."
+          fi
+      - name: checks that Azure SQL database connection string exists
+        run: |
+          if [ -z "${{ secrets.AZURE_SQLDB_CONNECTION_STRING }}" ]; then
+            echo "Secret "AZURE_SQLDB_CONNECTION_STRING" not found. Workflow will stop. Please create a secret called "AZURE_SQLDB_CONNECTION_STRING" and store the Azure storage container's connection string then run workflow again."
+            exit 1
+          else
+            echo "Secret "AZURE_SQLDB_CONNECTION_STRING" found. Workflow will continue."
+          fi
+
+  run-terraform:
+    needs: check-for-access-keys-in-secrets
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v3
+      - name: login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: run terraform init
+        run: |
+          cd tf
+          export ARM_CLIENT_ID=$ARM_CLIENT_ID
+          export ARM_CLIENT_SECRET=$ARM_CLIENT_SECRET
+          export ARM_TENANT_ID=$ARM_TENANT_ID
+          export ARM_SUBSCRIPTION_ID=$ARM_SUBSCRIPTION_ID
+          terraform init \
+            -backend-config="resource_group_name=$AZ_RG_PREFIX-$AZ_RG_ID" \
+            -backend-config="storage_account_name=$AZ_RG_PREFIX$AZ_STORAGE_PREFIX$AZ_RG_ID" \
+            -backend-config="container_name=$AZ_RG_PREFIX"tf"$AZ_RG_ID" \
+            -backend-config="key=terraform.tfstate"
+      - name: run terraform validate
+        run: terraform validate
+      - name: run terraform apply
+        run: |
+          cd tf
+          export ARM_CLIENT_ID=$ARM_CLIENT_ID
+          export ARM_CLIENT_SECRET=$ARM_CLIENT_SECRET
+          export ARM_TENANT_ID=$ARM_TENANT_ID
+          export ARM_SUBSCRIPTION_ID=$ARM_SUBSCRIPTION_ID
+          terraform apply \
+            -auto-approve \
+            -var rg_id=$RG_ID \
+            -var rg_name=$AZ_RG_PREFIX-$AZ_RG_ID \
+            -var storage_name=$AZ_RG_PREFIX$AZ_STORAGE_PREFIX$AZ_RG_ID \
+            -var location_name=$AZ_LOCATION \
+            -var container_name=$AZ_RG_PREFIX$AZ_CONTAINER_PREFIX$AZ_RG_ID \
+            -var storage_id=$(az storage account show --name $AZ_RG_PREFIX$AZ_STORAGE_PREFIX$AZ_RG_ID | jq -r '.id') \
+            -var mssql_password=$ARM_SQLDB_PASSWORD \
+            -var blob_connection_string="${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}" \
+            -var sqldb_connection_string="${{ secrets.AZURE_SQLDB_CONNECTION_STRING }}" \
+            -state="https://$AZ_RG_PREFIX$AZ_STORAGE_PREFIX$AZ_RG_ID.blob.core.windows.net/$AZ_RG_PREFIX$AZ_CONTAINER_PREFIX$AZ_RG_ID"
+
+  copy-adventureworks-to-storage-container:
+    needs: run-terraform
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v3
+      - name: login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: upload Adventureworks raw data
+        run: |
+          az storage blob upload-batch \
+            --account-name $AZ_RG_PREFIX$AZ_STORAGE_PREFIX$AZ_RG_ID \
+            --account-key ${{ secrets.AZURE_STORAGE_KEY }} \
+            --source data/raw \
+            --destination $AZ_RG_PREFIX$AZ_CONTAINER_PREFIX$AZ_RG_ID/data/raw

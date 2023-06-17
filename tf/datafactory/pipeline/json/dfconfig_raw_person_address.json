@@ -1,0 +1,91 @@
+{
+  "json_type_properties": {
+    "schema": "raw_person",
+    "table": "address"
+  },
+  "json_schema": [
+    {
+      "name": "AddressID",
+      "type": "nvarchar"
+    },
+    {
+      "name": "AddressLine1",
+      "type": "nvarchar"
+    },
+    {
+      "name": "AddressLine2",
+      "type": "nvarchar"
+    },
+    {
+      "name": "City",
+      "type": "nvarchar"
+    },
+    {
+      "name": "StateProvinceID",
+      "type": "nvarchar"
+    },
+    {
+      "name": "PostalCode",
+      "type": "nvarchar"
+    },
+    {
+      "name": "SpatialLocation",
+      "type": "nvarchar"
+    },
+    {
+      "name": "rowguid",
+      "type": "nvarchar"
+    },
+    {
+      "name": "ModifiedDate",
+      "type": "nvarchar"
+    }
+  ],
+  "activities_json": [
+    {
+      "name": "Copy CSV data from Blob Store to SQL Database",
+      "type": "Copy",
+      "dependsOn": [],
+      "policy": {
+        "timeout": "0.01:00:00",
+        "retry": 0,
+        "retryIntervalInSeconds": 30,
+        "secureOutput": false,
+        "secureInput": false
+      },
+      "userProperties": [],
+      "typeProperties": {
+        "source": {
+          "type": "DelimitedTextSource",
+          "storeSettings": {
+            "type": "AzureBlobStorageReadSettings",
+            "recursive": false,
+            "enablePartitionDiscovery": false
+          },
+          "formatSettings": {
+            "type": "DelimitedTextReadSettings"
+          }
+        },
+        "sink": {
+          "type": "AzureSqlSink",
+          "writeBehavior": "insert",
+          "sqlWriterUseTableLock": false,
+          "tableOption": "autoCreate",
+          "disableMetricsCollection": false
+        }
+      },
+      "inputs": [
+        {
+          "referenceName": "raw_person_address",
+          "type": "DatasetReference"
+        }
+      ],
+      "outputs": [
+        {
+          "referenceName": "raw_person_address_table",
+          "type": "DatasetReference"
+            }
+          ]
+        }
+      ]
+    }

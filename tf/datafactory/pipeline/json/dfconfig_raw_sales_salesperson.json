@@ -1,0 +1,91 @@
+{
+  "json_type_properties": {
+    "schema": "raw_sales",
+    "table": "salesperson"
+  },
+  "json_schema": [
+    {
+      "name": "BusinessEntityID",
+      "type": "int"
+    },
+    {
+      "name": "TerritoryID",
+      "type": "int"
+    },
+    {
+      "name": "SalesQuota",
+      "type": "money"
+    },
+    {
+      "name": "Bonus",
+      "type": "money"
+    },
+    {
+      "name": "CommissionPct",
+      "type": "smallmoney"
+    },
+    {
+      "name": "SalesYTD",
+      "type": "money"
+    },
+    {
+      "name": "SalesLastYear",
+      "type": "money"
+    },
+    {
+      "name": "rowguid",
+      "type": "uniqueidentifier"
+    },
+    {
+      "name": "ModifiedDate",
+      "type": "datetime"
+    }
+  ],
+  "activities_json": [
+    {
+      "name": "Copy CSV data from Blob Store to SQL Database",
+      "type": "Copy",
+      "dependsOn": [],
+      "policy": {
+        "timeout": "0.01:00:00",
+        "retry": 0,
+        "retryIntervalInSeconds": 30,
+        "secureOutput": false,
+        "secureInput": false
+      },
+      "userProperties": [],
+      "typeProperties": {
+        "source": {
+          "type": "DelimitedTextSource",
+          "storeSettings": {
+            "type": "AzureBlobStorageReadSettings",
+            "recursive": false,
+            "enablePartitionDiscovery": false
+          },
+          "formatSettings": {
+            "type": "DelimitedTextReadSettings"
+          }
+        },
+        "sink": {
+          "type": "AzureSqlSink",
+          "writeBehavior": "insert",
+          "sqlWriterUseTableLock": false,
+          "tableOption": "autoCreate",
+          "disableMetricsCollection": false
+        }
+      },
+      "inputs": [
+        {
+          "referenceName": "raw_sales_salesperson",
+          "type": "DatasetReference"
+        }
+      ],
+      "outputs": [
+        {
+          "referenceName": "raw_sales_salesperson_table",
+          "type": "DatasetReference"
+        }
+      ]
+    }
+  ]
+}

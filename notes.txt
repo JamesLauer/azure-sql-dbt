@@ -1,0 +1,2 @@
+1. SAS is required for bulk loading csv's into SQL db. See https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/storage_account_blob_container_sas
+2. Terraform pipeline module fails on first deploy because the resources take time to be created. On second attempt after all have been created, it runs fine. Include a workaround for this.
