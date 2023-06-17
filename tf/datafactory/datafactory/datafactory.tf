@@ -30,7 +30,7 @@ resource "azurerm_data_factory_linked_service_azure_blob_storage" "datafactory" 
 resource "azurerm_data_factory_linked_service_azure_sql_database" "datafactory" {
   name              = "sql_db"
   data_factory_id   = azurerm_data_factory.datafactory.id
-  connection_string = var.sqldb_connection_string
+  connection_string = var.sqldb_connection_string != "" ? var.sqldb_connection_string : "default"
 }
 
 output "datafactory_id" {

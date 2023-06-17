@@ -112,13 +112,6 @@ jobs:
           export ARM_CLIENT_SECRET=$ARM_CLIENT_SECRET
           export ARM_TENANT_ID=$ARM_TENANT_ID
           export ARM_SUBSCRIPTION_ID=$ARM_SUBSCRIPTION_ID
-          
-          if [[ -z "${{ secrets.AZURE_SQLDB_CONNECTION_STRING }}" ]]; then
-            sqldb_connection_string="default"
-          else
-            sqldb_connection_string="${{ secrets.AZURE_SQLDB_CONNECTION_STRING }}"
-          fi
-          
           terraform apply \
             -auto-approve \
             -var rg_id=$RG_ID \
