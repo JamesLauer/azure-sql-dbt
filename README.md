@@ -140,22 +140,22 @@ Key and connection string security is provided completely by GitHub Secrets. The
 * _AZURE_CREDENTIALS_ - Used to log into Azure via the Azure CLI with a service principle in GitHub Actions. The Azure credentials consists of 
   "clientId", "clientSecret", "subscriptionId" and "tenantId". See [link](https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure?tabs=azure-portal%2Cwindows) for more information. 
 
-* _AZURE_CLIENT_ID_ - Taken from AZURE_CREDENTIALS above and used for Terraform init and apply.  
+* _AZURE_CLIENT_ID_ - Taken from AZURE_CREDENTIALS above and used for Terraform init and apply
 
-* _AZURE_CLIENT_SECRET_ - Taken from AZURE_CREDENTIALS above and used for Terraform init and apply. 
+* _AZURE_CLIENT_SECRET_ - Taken from AZURE_CREDENTIALS above and used for Terraform init and apply 
 
-* _AZURE_SUBSCRIPTION_ID_ - Taken from AZURE_CREDENTIALS above and used for Terraform init and apply. 
+* _AZURE_SUBSCRIPTION_ID_ - Taken from AZURE_CREDENTIALS above and used for Terraform init and apply
 
-* _AZURE_TENANT_ID_ - Taken from AZURE_CREDENTIALS above and used for Terraform init and apply. 
+* _AZURE_TENANT_ID_ - Taken from AZURE_CREDENTIALS above and used for Terraform init and apply
 
 * _AZURE_SQLSERVER_PASSWORD_ - Used to define the password for SQL Server 
 
-* _AZURE_STORAGE_KEY_ - Used to copy initial AdventureWorks CSV files from the GitHub repository to Azure storage container (GH-0_4)
+* _AZURE_STORAGE_KEY_ - Used to copy initial AdventureWorks CSV files from the GitHub repository to Azure storage container (GH-0_6)
 
-* _AZURE_STORAGE_CONNECTION_STRING_ - Used by Terraform and ADF to establish a linked service to the storage container that contains the CSV files.
+* _AZURE_STORAGE_CONNECTION_STRING_ - Used by Terraform and ADF to establish a linked service to the storage container that contains the CSV files 
 
 * _AZURE_SQLDB_CONNECTION_STRING_ - Used by Terraform and ADF to establish a linked service to the SQL Database that is to contain the CSV file 
-  raw data.
+  raw data 
 
 **Encryption**
 

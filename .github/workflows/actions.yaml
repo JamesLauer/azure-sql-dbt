@@ -60,7 +60,7 @@ jobs:
             --name $AZ_RG_PREFIX$AZ_CONTAINER_PREFIX$AZ_RG_ID \
             --account-name $AZ_RG_PREFIX$AZ_STORAGE_PREFIX$AZ_RG_ID
 
-  check-for-access-keys-in-secrets:
+  check-for-storage-keys-in-secrets:
     needs: create-az-rg-and-storage
     runs-on: ubuntu-latest
     steps:
@@ -90,7 +90,7 @@ jobs:
           fi
 
   run-terraform:
-    needs: check-for-access-keys-in-secrets
+    needs: check-for-storage-keys-in-secrets
     runs-on: ubuntu-latest
     steps:
       - name: checkout code
@@ -133,8 +133,21 @@ jobs:
             -var sqldb_connection_string="${{ secrets.AZURE_SQLDB_CONNECTION_STRING }}" \
             -state="https://$AZ_RG_PREFIX$AZ_STORAGE_PREFIX$AZ_RG_ID.blob.core.windows.net/$AZ_RG_PREFIX$AZ_CONTAINER_PREFIX$AZ_RG_ID"
 
-  copy-adventureworks-to-storage-container:
+  check-for-sqldb-key-in-secrets:
     needs: run-terraform
+    runs-on: ubuntu-latest
+    steps:
+      - name: checks that Azure SQL database connection string exists
+        run: |
+          if [ -z "${{ secrets.AZURE_SQLDB_CONNECTION_STRING }}" ]; then
+            echo "Secret "AZURE_SQLDB_CONNECTION_STRING" not found. Workflow will stop. Please create a secret called "AZURE_SQLDB_CONNECTION_STRING" and store the Azure storage container's connection string then run workflow again."
+            exit 1
+          else
+            echo "Secret "AZURE_SQLDB_CONNECTION_STRING" found. Workflow will continue."
+          fi
+
+  copy-adventureworks-to-storage-container:
+    needs: check-for-sqldb-key-in-secrets
     runs-on: ubuntu-latest
     steps:
       - name: checkout code
