@@ -36,6 +36,9 @@ resource "azurerm_data_factory_linked_service_azure_sql_database" "datafactory" 
 output "datafactory_id" {
   value = azurerm_data_factory.datafactory.id
 }
+output "datafactory_name" {
+  value = azurerm_data_factory.datafactory.name
+}
 output "blob_store_service_name" {
   value = azurerm_data_factory_linked_service_azure_blob_storage.datafactory.name
 }

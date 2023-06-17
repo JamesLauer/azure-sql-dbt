@@ -74,40 +74,40 @@ locals {
     container_name = var.container_name
   }
   mssqldb_input_vars = {
-    mssql_db_name  = "mssqldb"
+    mssql_db_name = "mssqldb"
     mssql_password = var.mssql_password
   }
   datafactory_input_vars = {
-    datafactory_name        = "csv-load-df"
-    storage_id              = var.storage_id
-    blob_connection_string  = var.blob_connection_string
+    datafactory_name = "csv-load-df"
+    storage_id       = var.storage_id
+    blob_connection_string = var.blob_connection_string
     sqldb_connection_string = var.sqldb_connection_string
   }
 }
 
 # Import sql db module
 module "mssqldb" {
-  source         = "./mssqldb"
-  location_name  = local.global_input_vars["location_name"]
-  rg_name        = local.global_input_vars["rg_name"]
-  mssql_db_name  = "${local.mssqldb_input_vars["mssql_db_name"]}-${local.global_input_vars["rg_name"]}"
+  source        = "./mssqldb"
+  location_name = local.global_input_vars["location_name"]
+  rg_name       = local.global_input_vars["rg_name"]
+  mssql_db_name = "${local.mssqldb_input_vars["mssql_db_name"]}-${local.global_input_vars["rg_name"]}"
   mssql_password = ""
 }
 
 # Import data factory module
 module "datafactory" {
-  source                  = "./datafactory/datafactory"
-  location_name           = local.global_input_vars["location_name"]
-  rg_name                 = local.global_input_vars["rg_name"]
-  datafactory_name        = local.datafactory_input_vars["datafactory_name"]
-  blob_connection_string  = local.datafactory_input_vars["blob_connection_string"]
+  source                 = "./datafactory/datafactory"
+  location_name          = local.global_input_vars["location_name"]
+  rg_name                = local.global_input_vars["rg_name"]
+  datafactory_name       = "${local.datafactory_input_vars["datafactory_name"]}-${local.global_input_vars["rg_name"]}"
+  blob_connection_string = local.datafactory_input_vars["blob_connection_string"]
   sqldb_connection_string = local.datafactory_input_vars["sqldb_connection_string"]
 }
 
 # Import data factory pipeline module
 module "pipeline" {
   source                  = "./datafactory/pipeline"
-  datafactory_name        = "${local.datafactory_input_vars["datafactory_name"]}-${local.global_input_vars["rg_name"]}"
+  datafactory_name        = module.datafactory.datafactory_name
   container_name          = local.global_input_vars["container_name"]
   datafactory_id          = module.datafactory.datafactory_id
   blob_store_service_name = module.datafactory.blob_store_service_name
