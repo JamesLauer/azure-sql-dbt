@@ -80,14 +80,6 @@ jobs:
           else
             echo "Secret "AZURE_STORAGE_CONNECTION_STRING" found. Workflow will continue."
           fi
-      - name: checks that Azure SQL database connection string exists
-        run: |
-          if [ -z "${{ secrets.AZURE_SQLDB_CONNECTION_STRING }}" ]; then
-            echo "Secret "AZURE_SQLDB_CONNECTION_STRING" not found. Workflow will stop. Please create a secret called "AZURE_SQLDB_CONNECTION_STRING" and store the Azure storage container's connection string then run workflow again."
-            exit 1
-          else
-            echo "Secret "AZURE_SQLDB_CONNECTION_STRING" found. Workflow will continue."
-          fi
 
   run-terraform:
     needs: check-for-storage-keys-in-secrets
