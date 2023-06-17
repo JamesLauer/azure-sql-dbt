@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: sales_salesorderdetail
+    columns:
+      - name: "SalesOrderID"
+        description: Tests the sales order id
+        tests:
+          - not_null
+          - unique

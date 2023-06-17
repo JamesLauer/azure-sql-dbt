@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: sales_salesperson
+    columns:
+      - name: "BusinessEntityID"
+        description: Tests the business entity id
+        tests:
+          - not_null
+          - unique

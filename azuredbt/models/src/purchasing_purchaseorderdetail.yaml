@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: purchasing_purchaseorderdetail
+    columns:
+      - name: "PurchaseOrderID"
+        description: Tests the purchase order id
+        tests:
+          - not_null
+          - unique
