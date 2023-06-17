@@ -91,7 +91,7 @@ module "mssqldb" {
   location_name = local.global_input_vars["location_name"]
   rg_name       = local.global_input_vars["rg_name"]
   mssql_db_name = "${local.mssqldb_input_vars["mssql_db_name"]}-${local.global_input_vars["rg_name"]}"
-  mssql_password = ""
+  mssql_password = local.mssqldb_input_vars["mssql_password"]
 }
 
 # Import data factory module
