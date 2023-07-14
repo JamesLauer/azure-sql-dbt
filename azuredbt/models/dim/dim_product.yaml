@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: dim_product
+    columns:
+      - name: "ProductID"
+        description: Tests the product id
+        tests:
+          - not_null
+          - unique

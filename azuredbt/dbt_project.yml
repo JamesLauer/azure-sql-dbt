@@ -38,6 +38,14 @@ models:
       +materialized: table
       +schema: src
       +as_columnstore: False
+    dim:
+      +materialized: table
+      +schema: dim
+      +as_columnstore: False
+    fct:
+      +materialized: table
+      +schema: fct
+      +as_columnstore: False
 
 tests:
   azuredbt:

@@ -56,6 +56,7 @@ variable "dataset_name" {
     "raw_person_person",
     "raw_production_product",
     "raw_purchasing_purchaseorderdetail",
+    "raw_sales_customer",
     "raw_sales_salesorderdetail",
     "raw_sales_salesorderheader",
     "raw_sales_salesperson"

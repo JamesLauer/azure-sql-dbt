@@ -1,3 +1,10 @@
+{{ config(
+    post_hook=[
+    "ALTER TABLE {{ this }} ALTER COLUMN ProductID INT NOT NULL",
+    "ALTER TABLE {{ this }} ADD CONSTRAINT production_product_pk PRIMARY KEY (ProductID)"
+    ]
+)}}
+
 WITH cte AS (
     SELECT * FROM raw_production.product
 )

@@ -1,7 +1,7 @@
 {{ config(
     post_hook=[
     "ALTER TABLE {{ this }} ALTER COLUMN BusinessEntityID INT NOT NULL",
-    "ALTER TABLE {{ this }} ADD CONSTRAINT business_entity_person_fk FOREIGN KEY (BusinessEntityID) REFERENCES src.person_businessentity(BusinessEntityID)",
+    "ALTER TABLE {{ this }} ADD CONSTRAINT business_entity_person_fk FOREIGN KEY (BusinessEntityID) REFERENCES dev_src.person_businessentity(BusinessEntityID)",
     ]
 )}}
 
