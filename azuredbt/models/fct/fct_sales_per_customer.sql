@@ -1,27 +1,18 @@
-WITH dim_person AS (
-    SELECT BusinessEntityID
-    FROM dev_dim.person_person
-),
+WITH dim_person AS (SELECT CustomerID
+                    , Name
+                    , City
+                    , PostalCode
+                    FROM dev_dim.dim_person_person),
 
-dim_address AS (
-    SELECT BusinessEntityID AS address_beid
-        , AddressID
-    FROM dev_dim.person_address
-),
+     dim_salesdetail AS (SELECT SalesOrderID
+                              , CustomerID AS cid
+                              , LineTotal
+                         FROM dev_dim.dim_salesdetail)
 
-dim_salesdetail AS (
-    SELECT SalesOrderID
-        , CustomerID
-        , TotalDuePerOrder
-    FROM dev_dim.person_salesdetail
-)
-
-
-SELECT BusinessEntityID
-, AddressID
-, SalesOrderID
-, SUM(TotalDuePerOrder) AS SumPerCustomer
+SELECT CustomerID
+     , City
+     , PostalCode
+     , SUM(LineTotal) AS SumPerCustomer
 FROM dim_person
-LEFT JOIN dim_address on dim_person.BusinessEntityID = dim_address.address_beid
-LEFT JOIN dim_salesdetail on dim_address.address_beid = dim_salesdetail.CustomerID
-ORDER BY SumPerCustomer DESC
+         LEFT JOIN dim_salesdetail ON dim_person.CustomerID = dim_salesdetail.cid
+GROUP BY CustomerID, City, PostalCode

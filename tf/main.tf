@@ -54,6 +54,8 @@ variable "dataset_name" {
     "raw_person_businessentity",
     "raw_person_businessentityaddress",
     "raw_person_person",
+    "raw_person_stateprovince",
+    "raw_person_countryregion",
     "raw_production_product",
     "raw_purchasing_purchaseorderdetail",
     "raw_sales_customer",

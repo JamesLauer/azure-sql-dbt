@@ -11,8 +11,43 @@
     ]
 )}}
 
-WITH src_salesdetail AS (
-    SELECT SalesOrderID
+WITH src_salesdetail AS (SELECT SalesOrderID
+                              , SalesOrderDetailID
+                              , CarrierTrackingNumber
+                              , OrderQty
+                              , ProductID
+                              , UnitPrice
+                              , UnitPriceDiscount
+                              , LineTotal
+                         FROM dev_src.sales_salesorderdetail),
+
+     src_salesheader AS (SELECT SalesOrderID AS soid
+                              , RevisionNumber
+                              , OrderDate
+                              , DueDate
+                              , ShipDate
+                              , Status
+                              , OnlineOrderFlag
+                              , SalesOrderNumber
+                              , PurchaseOrderNumber
+                              , AccountNumber
+                              , CustomerID
+                              , SalesPersonID
+                              , TerritoryID
+                              , BillToAddressID
+                              , ShipToAddressID
+                              , ShipMethodID
+                              , CreditCardID
+                              , CreditCardApprovalCode
+                              , CurrencyRateID
+                              , SubTotal
+                              , TaxAmt
+                              , Freight
+                              , TotalDue
+                              , Comment
+                         FROM dev_src.sales_salesorderheader)
+
+SELECT SalesOrderID
      , SalesOrderDetailID
      , CarrierTrackingNumber
      , OrderQty
@@ -20,71 +55,30 @@ WITH src_salesdetail AS (
      , UnitPrice
      , UnitPriceDiscount
      , LineTotal
-     , ModifiedDate
-    FROM dev_src.sales_salesorderdetail
-),
-
-src_salesheader AS (
-    SELECT SalesOrderID AS soid
-    , RevisionNumber
-    , OrderDate
-    , DueDate
-    , ShipDate
-    , Status
-    , OnlineOrderFlag
-    , SalesOrderNumber
-    , PurchaseOrderNumber
-    , AccountNumber
-    , CustomerID
-    , SalesPersonID
-    , TerritoryID
-    , BillToAddressID
-    , ShipToAddressID
-    , ShipMethodID
-    , CreditCardID
-    , CreditCardApprovalCode
-    , CurrencyRateID
-    , SubTotal
-    , TaxAmt
-    , Freight
-    , TotalDue
-    , Comment
-    FROM dev_src.sales_salesorderheader
-)
-
- SELECT SalesOrderID
-    , SalesOrderDetailID
-    , CarrierTrackingNumber
-    , OrderQty
-    , ProductID
-    , UnitPrice
-    , UnitPriceDiscount
-    , LineTotal
-    , ModifiedDate
-    , RevisionNumber
-    , OrderDate
-    , DueDate
-    , ShipDate
-    , Status
-    , OnlineOrderFlag
-    , SalesOrderNumber
-    , PurchaseOrderNumber
-    , AccountNumber
-    , CustomerID
-    , SalesPersonID
-    , TerritoryID
-    , BillToAddressID
-    , ShipToAddressID
-    , ShipMethodID
-    , CreditCardID
-    , CreditCardApprovalCode
-    , CurrencyRateID
-    , SubTotal AS SubTotalPerOrder
-    , TaxAmt AS TaXAmtPerOrder
-    , Freight AS FreightPerOrder
-    , TotalDue AS TotalDuePerOrder
-    , Comment
+     , RevisionNumber
+     , OrderDate
+     , DueDate
+     , ShipDate
+     , Status
+     , OnlineOrderFlag
+     , SalesOrderNumber
+     , PurchaseOrderNumber
+     , AccountNumber
+     , CustomerID
+     , SalesPersonID
+     , TerritoryID
+     , BillToAddressID
+     , ShipToAddressID
+     , ShipMethodID
+     , CreditCardID
+     , CreditCardApprovalCode
+     , CurrencyRateID
+     , SubTotal AS SubTotalPerOrder
+     , TaxAmt   AS TaXAmtPerOrder
+     , Freight  AS FreightPerOrder
+     , TotalDue AS TotalDuePerOrder
+     , Comment
 FROM src_salesdetail
-LEFT JOIN src_salesheader on src_salesdetail.SalesOrderID = src_salesheader.soid
+         LEFT JOIN src_salesheader ON src_salesdetail.SalesOrderID = src_salesheader.soid
 
 
