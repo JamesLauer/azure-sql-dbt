@@ -37,8 +37,12 @@ WITH src_customer AS (SELECT CustomerID
                      FROM dev_src.person_address),
 
      src_stateprovince AS (SELECT StateProvinceID AS spid
-                      , Name
-                    FROM dev_src.person_stateprovince)
+                                , Name            AS State
+                           FROM dev_src.person_stateprovince),
+
+     src_countryregion AS (SELECT CountryRegionCode AS spid
+                                , Name              AS Country
+                           FROM dev_src.person_countryregion)
 
 SELECT CustomerID
      , PersonID
@@ -53,6 +57,7 @@ SELECT CustomerID
      , AddressLine1
      , AddressLine2
      , City
+     , State
      , PostalCode
      , SpatialLocation
      , AdditionalContactInfo
@@ -66,4 +71,6 @@ FROM src_customer
                    ON src_businessentityaddress.AddressID = src_address.aid
          LEFT JOIN src_stateprovince
                    ON src_address.StateProvinceID = src_stateprovince.spid
+         LEFT JOIN src_countryregion
+                   ON src_stateprovince.State = src_countryregion.Country
 

@@ -13,7 +13,7 @@
       "type": "nvarchar"
     },
     {
-      "name": "ModifiedDate",
+      "name": "ModifiedDate ",
       "type": "nvarchar"
     }
   ],
