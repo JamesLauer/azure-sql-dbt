@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: person_stateprovince
+    columns:
+      - name: "StateProvinceID"
+        description: Tests the state province id
+        tests:
+          - not_null
+          - unique

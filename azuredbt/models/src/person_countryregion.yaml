@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: person_countryregion
+    columns:
+      - name: CountryRegionCode
+        description: Tests the country region code
+        tests:
+          - not_null
+          - unique

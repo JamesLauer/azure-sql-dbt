@@ -13,4 +13,5 @@ SELECT CAST(CustomerID AS int)           AS CustomerID
      , CAST(TerritoryID AS int)          AS TerritoryID
      , CAST(AccountNumber AS varchar)    AS AccountNumber
      , CAST(rowguid AS uniqueidentifier) AS rowguid
+     , CAST('ModifiedDate ' AS varchar)  AS ModifiedDate
 FROM cte

@@ -1,10 +1,3 @@
-{{ config(
-    post_hook=[
-    "ALTER TABLE {{ this }} ALTER COLUMN CustomerID INT NOT NULL",
-    "ALTER TABLE {{ this }} ADD CONSTRAINT customerid_fk_person_person FOREIGN KEY (CustomerID) REFERENCES dev_src.sales_customer(CustomerID)",
-    ]
-)}}
-
 WITH src_customer AS (SELECT CustomerID
                            , PersonID
                            , AccountNumber
@@ -34,14 +27,18 @@ WITH src_customer AS (SELECT CustomerID
                           , StateProvinceID
                           , PostalCode
                           , SpatialLocation
-                     FROM dev_src.person_address),
+                          , ModifiedDate
+                     FROM dev_src.person_address
+                     WHERE ModifiedDate = (SELECT MAX(ModifiedDate)
+                                           FROM dev_src.person_address)),
 
-     src_stateprovince AS (SELECT StateProvinceID AS spid
-                                , Name            AS State
+     src_stateprovince AS (SELECT StateProvinceID   AS spid
+                                , CountryRegionCode AS sprc
+                                , Name              AS State
                            FROM dev_src.person_stateprovince),
 
-     src_countryregion AS (SELECT CountryRegionCode AS spid
-                                , Name              AS Country
+     src_countryregion AS (SELECT CountryRegionCode
+                                , Name AS Country
                            FROM dev_src.person_countryregion)
 
 SELECT CustomerID
@@ -54,23 +51,25 @@ SELECT CustomerID
      , MiddleName
      , LastName
      , Suffix
-     , AddressLine1
-     , AddressLine2
-     , City
-     , State
-     , PostalCode
-     , SpatialLocation
+--      , AddressLine1
+--      , AddressLine2
+--      , City
+--      , State
+--      , Country
+--      , PostalCode
+--      , SpatialLocation
      , AdditionalContactInfo
      , Demographics
+     , ModifiedDate
 FROM src_customer
-         LEFT JOIN src_person
+         INNER JOIN src_person
                    ON src_customer.PersonID = src_person.BusinessEntityID
-         LEFT JOIN src_businessentityaddress
+         INNER JOIN src_businessentityaddress
                    ON src_person.BusinessEntityID = src_businessentityaddress.bid
-         LEFT JOIN src_address
-                   ON src_businessentityaddress.AddressID = src_address.aid
-         LEFT JOIN src_stateprovince
-                   ON src_address.StateProvinceID = src_stateprovince.spid
-         LEFT JOIN src_countryregion
-                   ON src_stateprovince.State = src_countryregion.Country
+--          LEFT JOIN src_address
+--                    ON src_businessentityaddress.AddressID = src_address.aid
+--          LEFT JOIN src_stateprovince
+--                    ON src_address.StateProvinceID = src_stateprovince.spid
+--          LEFT JOIN src_countryregion
+--                    ON src_stateprovince.sprc = src_countryregion.CountryRegionCode
 
