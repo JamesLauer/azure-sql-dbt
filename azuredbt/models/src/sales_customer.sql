@@ -1,7 +1,7 @@
 {{ config(
     post_hook=[
     "ALTER TABLE {{ this }} ALTER COLUMN CustomerID INT NOT NULL",
-    "ALTER TABLE {{ this }} ADD CONSTRAINT customerid_pk_sales_customer PRIMARY KEY (CustomerID)"
+    "ALTER TABLE {{ this }} ADD CONSTRAINT PK_CustomerID PRIMARY KEY (CustomerID)",
     ]
 )}}
 
@@ -13,5 +13,6 @@ SELECT CAST(CustomerID AS int)           AS CustomerID
      , CAST(TerritoryID AS int)          AS TerritoryID
      , CAST(AccountNumber AS varchar)    AS AccountNumber
      , CAST(rowguid AS uniqueidentifier) AS rowguid
-     , CAST('ModifiedDate ' AS varchar)  AS ModifiedDate
+     , CONVERT(DATE, ModifiedDate)       AS ModifiedDate
+     , CONVERT(TIME, ModifiedDate)       AS ModifiedTime
 FROM cte

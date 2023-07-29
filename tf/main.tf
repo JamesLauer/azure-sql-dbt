@@ -51,6 +51,7 @@ variable "sqldb_connection_string" {
 variable "dataset_name" {
   default = [
     "raw_person_address",
+    "raw_person_addresstype",
     "raw_person_businessentity",
     "raw_person_businessentityaddress",
     "raw_person_person",

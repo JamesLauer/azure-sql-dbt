@@ -4,7 +4,7 @@ models:
   - name: person_address
     columns:
       - name: AddressID
-        description: Tests the address id
+        description: Tests the AddressID
         tests:
           - not_null
           - unique

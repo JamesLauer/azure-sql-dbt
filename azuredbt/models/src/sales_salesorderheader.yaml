@@ -3,8 +3,8 @@ version: 2
 models:
   - name: sales_salesorderheader
     columns:
-      - name: "SalesOrderID"
-        description: Tests the sales order id
+      - name: SalesOrderID
+        description: Tests the SalesOrderID
         tests:
           - not_null
           - unique

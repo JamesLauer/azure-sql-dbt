@@ -3,8 +3,8 @@ version: 2
 models:
   - name: person_businessentityaddress
     columns:
-      - name: "BusinessEntityID"
-        description: Tests the business entity id
+      - name: AddressID
+        description: Tests the AddressID
         tests:
           - not_null
           - unique

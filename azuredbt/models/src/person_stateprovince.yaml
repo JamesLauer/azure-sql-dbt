@@ -3,8 +3,8 @@ version: 2
 models:
   - name: person_stateprovince
     columns:
-      - name: "StateProvinceID"
-        description: Tests the state province id
+      - name: StateProvinceID
+        description: Tests the StateProvinceID
         tests:
           - not_null
           - unique

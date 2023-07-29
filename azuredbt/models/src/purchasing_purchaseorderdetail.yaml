@@ -3,8 +3,8 @@ version: 2
 models:
   - name: purchasing_purchaseorderdetail
     columns:
-      - name: "PurchaseOrderID"
-        description: Tests the purchase order id
+      - name: PurchaseOrderDetailID
+        description: Tests the PurchaseOrderDetailID
         tests:
           - not_null
           - unique

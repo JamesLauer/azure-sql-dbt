@@ -3,8 +3,8 @@ version: 2
 models:
   - name: sales_customer
     columns:
-      - name: "CustomerID"
-        description: Tests the customer id
+      - name: CustomerID
+        description: Tests the CustomerID
         tests:
           - not_null
           - unique

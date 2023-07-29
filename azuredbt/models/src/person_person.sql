@@ -1,10 +1,7 @@
 {{ config(
-    pre_hook=[
-    "EXEC sp_rename '{{ this }}', 'ModifiedDate ', 'COLUMN'"
-    ],
     post_hook=[
     "ALTER TABLE {{ this }} ALTER COLUMN BusinessEntityID INT NOT NULL",
-    "ALTER TABLE {{ this }} ADD CONSTRAINT FK_srcPerson_BusinessEntityID FOREIGN KEY (BusinessEntityID) REFERENCES dev_src.person_businessentity(BusinessEntityID)"
+    "ALTER TABLE {{ this }} ADD CONSTRAINT FK_personperson_personbusinessentity FOREIGN KEY (BusinessEntityID) REFERENCES dev_src.person_businessentity(BusinessEntityID)",
     ]
 )}}
 
@@ -22,5 +19,6 @@ SELECT CAST(BusinessEntityID AS int)      AS BusinessEntityID
      , CAST(AdditionalContactInfo AS xml) AS AdditionalContactInfo
      , CAST(Demographics AS xml)          AS Demographics
      , CAST(rowguid AS uniqueidentifier)  AS rowguid
-     , CAST(ModifiedDate AS datetime)     AS ModifiedDate
+     , CONVERT(DATE, ModifiedDate)        AS ModifiedDate
+     , CONVERT(TIME, ModifiedDate)        AS ModifiedTime
 FROM cte

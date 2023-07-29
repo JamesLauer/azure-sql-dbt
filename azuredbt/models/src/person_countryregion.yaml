@@ -4,7 +4,7 @@ models:
   - name: person_countryregion
     columns:
       - name: CountryRegionCode
-        description: Tests the country region code
+        description: Tests the CountryRegionCode
         tests:
           - not_null
           - unique
