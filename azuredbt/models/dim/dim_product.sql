@@ -11,27 +11,14 @@ WITH src_product AS (
 SELECT ProductID
 , Name
 , ProductNumber
-, MakeFlag
-, FinishedGoodsFlag
 , Color
-, SafetyStockLevel
-, ReorderPoint
 , StandardCost
 , ListPrice
 , Size
 , SizeUnitMeasureCode
 , WeightUnitMeasureCode
 , Weight
-, DaysToManufacture
-, ProductLine
-, Class
-, Style
 , ProductSubcategoryID
 , ProductModelID
-, SellStartDate
-, SellEndDate
-, DiscontinuedDate
-, rowguid
-, ModifiedDate
 FROM src_product
 

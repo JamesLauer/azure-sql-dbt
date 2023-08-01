@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: dim_person_person
+  - name: dim_address
     columns:
       - name: BusinessEntityID
         description: Tests the BusinessEntityID

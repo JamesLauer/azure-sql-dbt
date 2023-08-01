@@ -58,6 +58,8 @@ variable "dataset_name" {
     "raw_person_stateprovince",
     "raw_person_countryregion",
     "raw_production_product",
+    "raw_production_productcategory",
+    "raw_production_productsubcategory",
     "raw_purchasing_purchaseorderdetail",
     "raw_sales_customer",
     "raw_sales_salesorderdetail",

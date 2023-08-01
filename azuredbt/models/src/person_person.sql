@@ -8,17 +8,16 @@
 WITH cte AS (SELECT *
              FROM raw_person.person)
 SELECT CAST(BusinessEntityID AS int)      AS BusinessEntityID
-     , CAST(PersonType AS nchar)          AS PersonType
-     , CAST(NameStyle AS varchar)         AS NameStyle
-     , CAST(Title AS varchar)             AS Title
-     , CAST(FirstName AS nvarchar)        AS FirstName
-     , CAST(MiddleName AS nvarchar)       AS MiddleName
-     , CAST(LastName AS nvarchar)         AS LastName
-     , CAST(Suffix AS nvarchar)           AS Suffix
+     , CAST(PersonType AS nchar(2))       AS PersonType
+     , CAST(NameStyle AS bit)             AS NameStyle
+     , CAST(Title AS nvarchar(8))         AS Title
+     , CAST(FirstName AS nvarchar(50))    AS FirstName
+     , CAST(MiddleName AS nvarchar(50))   AS MiddleName
+     , CAST(LastName AS nvarchar(50))     AS LastName
+     , CAST(Suffix AS nvarchar(50))       AS Suffix
      , CAST(EmailPromotion AS int)        AS EmailPromotion
      , CAST(AdditionalContactInfo AS xml) AS AdditionalContactInfo
      , CAST(Demographics AS xml)          AS Demographics
      , CAST(rowguid AS uniqueidentifier)  AS rowguid
-     , CONVERT(DATE, ModifiedDate)        AS ModifiedDate
-     , CONVERT(TIME, ModifiedDate)        AS ModifiedTime
+     , CAST(ModifiedDate AS datetime)     AS ModifiedDate
 FROM cte

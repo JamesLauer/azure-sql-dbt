@@ -7,31 +7,27 @@
     ]
 )}}
 
-WITH src_businessentityaddress AS (
-    SELECT BusinessEntityID
-    FROM dev_src.sales_salesperson
-),
+WITH src_businessentityaddress AS (SELECT BusinessEntityID
+                                   FROM dev_src.sales_salesperson),
 
-src_address AS (
-    SELECT AddressID AS aid
-      , AddressLine1
-      , AddressLine2
-      , City
-      , PostalCode
-      , SpatialLocation
-      , rowguid
-      , ModifiedDate
-    FROM dev_src.person_address
-)
+     src_address AS (SELECT AddressID
+                          , AddressLine1
+                          , AddressLine2
+                          , City
+                          , PostalCode
+                          , SpatialLocation
+                          , rowguid
+                          , ModifiedDate
+                     FROM dev_src.person_address)
 
 SELECT BusinessEntityID
-        , AddressID
-        , AddressLine1
-        , AddressLine2
-        , City
-        , PostalCode
-        , SpatialLocation
-        , rowguid
-        , ModifiedDate
+     , AddressID
+     , AddressLine1
+     , AddressLine2
+     , City
+     , PostalCode
+     , SpatialLocation
+     , rowguid
+     , ModifiedDate
 FROM src_businessentityaddress
-LEFT JOIN src_address on src_businessentityaddress.AddressID = src_address.aid
+         LEFT JOIN src_address ON src_businessentityaddress.AddressID = src_address.aid

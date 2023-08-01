@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: dim_person
+    columns:
+      - name: BusinessEntityID
+        description: Tests the BusinessEntityID
+        tests:
+          - not_null
+          - unique

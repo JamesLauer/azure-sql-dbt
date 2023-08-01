@@ -1,13 +1,16 @@
 {{ config(
     post_hook=[
+    "ALTER TABLE {{ this }} ADD DimSalesDetailID INT IDENTITY(1,1)",
+    "ALTER TABLE {{ this }} ALTER COLUMN DimSalesDetailID INT NOT NULL",
+    "ALTER TABLE {{ this }} ADD CONSTRAINT PK_DimSalesDetailID PRIMARY KEY (DimSalesDetailID)",
     "ALTER TABLE {{ this }} ALTER COLUMN SalesOrderID INT NOT NULL",
-    "ALTER TABLE {{ this }} ADD CONSTRAINT sales_order_fk_sales_detail FOREIGN KEY (SalesOrderID) REFERENCES dev_src.sales_salesorderheader(SalesOrderID)",
+    "ALTER TABLE {{ this }} ADD CONSTRAINT FK_dimsalesdetail_salesorderheader FOREIGN KEY (SalesOrderID) REFERENCES dev_src.sales_salesorderheader(SalesOrderID)",
     "ALTER TABLE {{ this }} ALTER COLUMN SalesOrderDetailID INT NOT NULL",
-    "ALTER TABLE {{ this }} ADD CONSTRAINT sales_order_detail_fk_sales_detail FOREIGN KEY (SalesOrderDetailID) REFERENCES dev_src.sales_salesorderdetail(SalesOrderDetailID)",
+    "ALTER TABLE {{ this }} ADD CONSTRAINT FK_dimsalesdetail_salessalesorderdetail FOREIGN KEY (SalesOrderDetailID) REFERENCES dev_src.sales_salesorderdetail(SalesOrderDetailID)",
     "ALTER TABLE {{ this }} ALTER COLUMN ProductID INT NOT NULL",
-    "ALTER TABLE {{ this }} ADD CONSTRAINT product_order_detail_fk_sales_detail FOREIGN KEY (ProductID) REFERENCES dev_src.production_product(ProductID)",
+    "ALTER TABLE {{ this }} ADD CONSTRAINT FK_dimsalesdetail_productionproduct FOREIGN KEY (ProductID) REFERENCES dev_src.production_product(ProductID)",
     "ALTER TABLE {{ this }} ALTER COLUMN CustomerID INT NOT NULL",
-    "ALTER TABLE {{ this }} ADD CONSTRAINT customer_fk_sales_detail FOREIGN KEY (CustomerID) REFERENCES dev_src.person_businessentity(BusinessEntityID)",
+    "ALTER TABLE {{ this }} ADD CONSTRAINT FK_dimsalesdetail_salescustomer FOREIGN KEY (CustomerID) REFERENCES dev_src.sales_customer(CustomerID)",
     ]
 )}}
 

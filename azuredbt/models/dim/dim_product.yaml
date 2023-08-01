@@ -3,8 +3,8 @@ version: 2
 models:
   - name: dim_product
     columns:
-      - name: "ProductID"
-        description: Tests the product id
+      - name: ProductID
+        description: Tests the ProductID
         tests:
           - not_null
           - unique

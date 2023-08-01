@@ -1,6 +1,5 @@
 WITH dim_person AS (SELECT CustomerID
-                         , Country
-                    FROM dev_dim.dim_person_person),
+                    FROM dev_dim.dim_person),
 
      dim_salesdetail AS (SELECT SalesOrderID
                               , CustomerID AS cid

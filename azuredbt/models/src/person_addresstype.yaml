@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: person_addresstype
+    columns:
+      - name: AddressTypeID
+        description: Tests the AddressTypeID
+        tests:
+          - not_null
+          - unique
