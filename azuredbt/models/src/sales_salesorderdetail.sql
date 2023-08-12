@@ -7,7 +7,7 @@
 
 
 WITH cte AS (SELECT *
-             FROM raw_sales.salesorderdetail)
+             FROM dev_raw.sales_salesorderdetail)
 SELECT CAST(SalesOrderID AS int)               AS SalesOrderID
      , CAST(SalesOrderDetailID AS int)         AS SalesOrderDetailID
      , CAST(CarrierTrackingNumber AS nvarchar) AS CarrierTrackingNumber

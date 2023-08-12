@@ -6,7 +6,7 @@
 )}}
 
 WITH cte AS (SELECT *
-             FROM raw_production.productcategory)
+             FROM dev_raw.production_productcategory)
 SELECT CAST(ProductCategoryID AS int)    AS ProductCategoryID
      , CAST(Name AS nvarchar(50))        AS Name
      , CAST(rowguid AS uniqueidentifier) AS rowguid

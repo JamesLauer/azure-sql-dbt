@@ -6,7 +6,7 @@
 )}}
 
 WITH cte AS (SELECT *
-             FROM raw_person.addresstype)
+             FROM dev_raw.person_addresstype)
 SELECT CAST(AddressTypeID AS int)        AS AddressTypeID
      , CAST(Name AS varchar)             AS AddressType
      , CAST(rowguid AS uniqueidentifier) AS rowguid

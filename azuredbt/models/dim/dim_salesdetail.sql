@@ -45,7 +45,12 @@ WITH src_salesdetail AS (SELECT SalesOrderID
                               , CreditCardApprovalCode
                               , CurrencyRateID
                               , Comment
-                         FROM dev_src.sales_salesorderheader)
+                         FROM dev_src.sales_salesorderheader),
+
+     src_customer AS (SELECT CustomerID AS cid
+                           , PersonID
+                           , StoreID
+                      FROM dev_src.sales_customer)
 
 SELECT SalesOrderID
      , SalesOrderDetailID
@@ -66,6 +71,8 @@ SELECT SalesOrderID
      , PurchaseOrderNumber
      , AccountNumber
      , CustomerID
+     , PersonID
+     , StoreID
      , SalesPersonID
      , TerritoryID
      , BillToAddressID
@@ -76,6 +83,9 @@ SELECT SalesOrderID
      , CurrencyRateID
      , Comment
 FROM src_salesdetail
-         LEFT JOIN src_salesheader ON src_salesdetail.SalesOrderID = src_salesheader.soid
+         LEFT JOIN src_salesheader
+                   ON src_salesdetail.SalesOrderID = src_salesheader.soid
+         LEFT JOIN src_customer
+                   ON src_salesheader.CustomerID = src_customer.cid
 
 

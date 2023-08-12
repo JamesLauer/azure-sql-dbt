@@ -6,7 +6,7 @@
 )}}
 
 WITH cte AS (SELECT *
-             FROM raw_person.address)
+             FROM dev_raw.person_address)
 SELECT CAST(AddressID AS int)             AS AddressID
      , CAST(AddressLine1 AS nvarchar(60)) AS AddressLine1
      , CAST(AddressLine2 AS nvarchar(60)) AS AddressLine2

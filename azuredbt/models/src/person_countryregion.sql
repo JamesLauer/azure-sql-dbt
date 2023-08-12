@@ -6,7 +6,7 @@
 )}}
 
 WITH cte AS (SELECT *
-             FROM raw_person.countryregion)
+             FROM dev_raw.person_countryregion)
 SELECT CAST(CountryRegionCode AS nvarchar(2)) AS CountryRegionCode
      , CAST(Name AS varchar)               AS Name
      , CAST(ModifiedDate AS datetime)     AS ModifiedDate

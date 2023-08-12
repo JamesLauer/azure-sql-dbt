@@ -6,7 +6,7 @@
 )}}
 
 WITH cte AS (SELECT *
-             FROM raw_sales.salesperson)
+             FROM dev_raw.sales_salesperson)
 SELECT CAST(BusinessEntityID AS int)     AS BusinessEntityID
      , CAST(TerritoryID AS int)          AS TerritoryID
      , CAST(SalesQuota AS money)         AS SalesQuota

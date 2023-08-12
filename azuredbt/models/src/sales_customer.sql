@@ -6,7 +6,7 @@
 )}}
 
 WITH cte AS (SELECT *
-             FROM raw_sales.customer)
+             FROM dev_raw.sales_customer)
 SELECT CAST(CustomerID AS int)            AS CustomerID
      , CAST(PersonID AS int)              AS PersonID
      , CAST(StoreID AS int)               AS StoreID

@@ -6,7 +6,7 @@
 )}}
 
 WITH cte AS (SELECT *
-             FROM raw_purchasing.purchaseorderdetail)
+             FROM dev_raw.purchasing_purchaseorderdetail)
 SELECT CAST(PurchaseOrderID AS int)       AS PurchaseOrderID
      , CAST(PurchaseOrderDetailID AS int) AS PurchaseOrderDetailID
      , CAST(DueDate AS datetime)          AS DueDate

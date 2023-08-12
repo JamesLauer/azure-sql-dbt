@@ -6,7 +6,7 @@
 )}}
 
 WITH cte AS (SELECT *
-             FROM raw_person.person)
+             FROM dev_raw.person_person)
 SELECT CAST(BusinessEntityID AS int)      AS BusinessEntityID
      , CAST(PersonType AS nchar(2))       AS PersonType
      , CAST(NameStyle AS bit)             AS NameStyle

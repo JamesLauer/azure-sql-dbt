@@ -9,7 +9,7 @@
 )}}
 
 WITH cte AS (SELECT *
-             FROM raw_person.businessentityaddress)
+             FROM dev_raw.person_businessentityaddress)
 SELECT CAST(BusinessEntityID AS int)     AS BusinessEntityID
      , CAST(AddressID AS int)            AS AddressID
      , CAST(AddressTypeID AS int)        AS AddressTypeID

@@ -6,7 +6,7 @@
 )}}
 
 WITH cte AS (SELECT *
-             FROM raw_production.product)
+             FROM dev_raw.production_product)
 SELECT CAST(ProductID AS int)              AS ProductID
      , CAST(Name AS nvarchar)              AS Name
      , CAST(ProductNumber AS nvarchar)     AS ProductNumber

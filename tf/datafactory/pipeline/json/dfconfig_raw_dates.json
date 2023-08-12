@@ -1,6 +1,6 @@
 {
   "json_type_properties": {
-    "schema": "raw",
+    "schema": "dev_raw",
     "table": "dates"
   },
   "json_schema": [

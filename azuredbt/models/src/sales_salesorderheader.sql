@@ -6,7 +6,7 @@
 )}}
 
 WITH cte AS (SELECT *
-             FROM raw_sales.salesorderheader)
+             FROM dev_raw.sales_salesorderheader)
 SELECT CAST(SalesOrderID AS int)               AS SalesOrderID
      , CAST(RevisionNumber AS tinyint)         AS RevisionNumber
      , CAST(OrderDate AS datetime)             AS OrderDate

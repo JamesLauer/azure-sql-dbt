@@ -6,7 +6,7 @@
 )}}
 
 WITH cte AS (SELECT *
-             FROM raw_person.businessentity)
+             FROM dev_raw.person_businessentity)
 SELECT CAST(BusinessEntityID AS int)     AS BusinessEntityID
      , CAST(rowguid AS uniqueidentifier) AS rowguid
      , CAST(ModifiedDate AS datetime)     AS ModifiedDate

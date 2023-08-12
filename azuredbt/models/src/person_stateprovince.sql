@@ -6,7 +6,7 @@
 )}}
 
 WITH cte AS (SELECT *
-             FROM raw_person.stateprovince)
+             FROM dev_raw.person_stateprovince)
 SELECT CAST(StateProvinceID AS int)         AS StateProvinceID
      , CAST(StateProvinceCode AS nchar)     AS StateProvinceCode
      , CAST(CountryRegionCode AS nvarchar)  AS CountryRegionCode
