@@ -9,6 +9,5 @@ WITH cte AS (SELECT *
              FROM raw_person.businessentity)
 SELECT CAST(BusinessEntityID AS int)     AS BusinessEntityID
      , CAST(rowguid AS uniqueidentifier) AS rowguid
-     , CONVERT(DATE, ModifiedDate)       AS ModifiedDate
-     , CONVERT(TIME, ModifiedDate)       AS ModifiedTime
+     , CAST(ModifiedDate AS datetime)     AS ModifiedDate
 FROM cte

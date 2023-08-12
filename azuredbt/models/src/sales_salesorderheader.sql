@@ -32,6 +32,5 @@ SELECT CAST(SalesOrderID AS int)               AS SalesOrderID
      , CAST(TotalDue AS money)                 AS TotalDue
      , CAST(Comment AS nvarchar)               AS Comment
      , CAST(rowguid AS uniqueidentifier)       AS rowguid
-     , CONVERT(DATE, ModifiedDate)             AS ModifiedDate
-     , CONVERT(TIME, ModifiedDate)             AS ModifiedTime
+     , CAST(ModifiedDate AS datetime)     AS ModifiedDate
 FROM cte

@@ -10,8 +10,7 @@ WITH cte AS (SELECT *
 SELECT CAST(AddressTypeID AS int)        AS AddressTypeID
      , CAST(Name AS varchar)             AS AddressType
      , CAST(rowguid AS uniqueidentifier) AS rowguid
-     , CONVERT(DATE, ModifiedDate)       AS ModifiedDate
-     , CONVERT(TIME, ModifiedDate)       AS ModifiedTime
+     , CAST(ModifiedDate AS datetime)     AS ModifiedDate
 FROM cte
 
 

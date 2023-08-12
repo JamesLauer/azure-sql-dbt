@@ -1,107 +1,59 @@
 {
   "json_type_properties": {
-    "schema": "dev_raw",
-    "table": "production_product"
+    "schema": "raw",
+    "table": "dates"
   },
   "json_schema": [
     {
-      "name": "ProductID",
+      "name": "TheDate",
       "type": "nvarchar"
     },
     {
-      "name": "Name",
+      "name": "TheDay",
       "type": "nvarchar"
     },
     {
-      "name": "ProductNumber",
+      "name": "TheDayName",
       "type": "nvarchar"
     },
     {
-      "name": "MakeFlag",
+      "name": "TheWeek",
       "type": "nvarchar"
     },
     {
-      "name": "FinishedGoodsFlag",
+      "name": "TheISOWeek",
       "type": "nvarchar"
     },
     {
-      "name": "Color",
+      "name": "TheDayOfWeek",
       "type": "nvarchar"
     },
     {
-      "name": "SafetyStockLevel",
+      "name": "TheMonth",
       "type": "nvarchar"
     },
     {
-      "name": "ReorderPoint",
+      "name": "TheMonthName",
       "type": "nvarchar"
     },
     {
-      "name": "StandardCost",
+      "name": "TheQuarter",
+      "type": "nvarchar"
+    },
+        {
+      "name": "TheYear",
       "type": "nvarchar"
     },
     {
-      "name": "ListPrice",
+      "name": "TheFirstOfMonth",
       "type": "nvarchar"
     },
     {
-      "name": "Size",
+      "name": "TheLastOfYear",
       "type": "nvarchar"
     },
     {
-      "name": "SizeUnitMeasureCode",
-      "type": "nvarchar"
-    },
-    {
-      "name": "WeightUnitMeasureCode",
-      "type": "nvarchar"
-    },
-    {
-      "name": "Weight",
-      "type": "nvarchar"
-    },
-    {
-      "name": "DaysToManufacture",
-      "type": "nvarchar"
-    },
-    {
-      "name": "ProductLine",
-      "type": "nvarchar"
-    },
-    {
-      "name": "Class",
-      "type": "nvarchar"
-    },
-    {
-      "name": "Style",
-      "type": "nvarchar"
-    },
-    {
-      "name": "ProductSubcategoryID",
-      "type": "nvarchar"
-    },
-    {
-      "name": "ProductModelID",
-      "type": "nvarchar"
-    },
-    {
-      "name": "SellStartDate",
-      "type": "nvarchar"
-    },
-    {
-      "name": "SellEndDate",
-      "type": "nvarchar"
-    },
-    {
-      "name": "DiscontinuedDate",
-      "type": "nvarchar"
-    },
-    {
-      "name": "rowguid",
-      "type": "nvarchar"
-    },
-    {
-      "name": "ModifiedDate",
+      "name": "TheDayOfYear",
       "type": "nvarchar"
     }
   ],
@@ -111,7 +63,7 @@
       "type": "Copy",
       "dependsOn": [],
       "policy": {
-        "timeout": "0.01:00:00",
+        "timeout": "0.00:05:00",
         "retry": 0,
         "retryIntervalInSeconds": 30,
         "secureOutput": false,
@@ -140,16 +92,16 @@
       },
       "inputs": [
         {
-          "referenceName": "raw_production_product",
+          "referenceName": "raw_dates",
           "type": "DatasetReference"
         }
       ],
       "outputs": [
         {
-          "referenceName": "raw_production_product_table",
+          "referenceName": "raw_dates_table",
           "type": "DatasetReference"
+            }
+          ]
         }
       ]
     }
-  ]
-}

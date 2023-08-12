@@ -19,6 +19,7 @@ WITH src_salesdetail AS (SELECT SalesOrderID
                               , CarrierTrackingNumber
                               , OrderQty
                               , ProductID
+                              , SpecialOfferID
                               , UnitPrice
                               , UnitPriceDiscount
                               , LineTotal
@@ -43,10 +44,6 @@ WITH src_salesdetail AS (SELECT SalesOrderID
                               , CreditCardID
                               , CreditCardApprovalCode
                               , CurrencyRateID
-                              , SubTotal
-                              , TaxAmt
-                              , Freight
-                              , TotalDue
                               , Comment
                          FROM dev_src.sales_salesorderheader)
 
@@ -55,6 +52,7 @@ SELECT SalesOrderID
      , CarrierTrackingNumber
      , OrderQty
      , ProductID
+     , SpecialOfferID
      , UnitPrice
      , UnitPriceDiscount
      , LineTotal
@@ -76,10 +74,6 @@ SELECT SalesOrderID
      , CreditCardID
      , CreditCardApprovalCode
      , CurrencyRateID
-     , SubTotal AS SubTotalPerOrder
-     , TaxAmt   AS TaXAmtPerOrder
-     , Freight  AS FreightPerOrder
-     , TotalDue AS TotalDuePerOrder
      , Comment
 FROM src_salesdetail
          LEFT JOIN src_salesheader ON src_salesdetail.SalesOrderID = src_salesheader.soid

@@ -15,6 +15,5 @@ SELECT CAST(BusinessEntityID AS int)     AS BusinessEntityID
      , CAST(SalesYTD AS money)           AS SalesYTD
      , CAST(SalesLastYear AS money)      AS SalesLastYear
      , CAST(rowguid AS uniqueidentifier) AS rowguid
-     , CONVERT(DATE, ModifiedDate)       AS ModifiedDate
-     , CONVERT(TIME, ModifiedDate)       AS ModifiedTime
+     , CAST(ModifiedDate AS datetime)    AS ModifiedDate
 FROM cte

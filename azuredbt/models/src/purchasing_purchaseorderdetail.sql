@@ -17,6 +17,5 @@ SELECT CAST(PurchaseOrderID AS int)       AS PurchaseOrderID
      , CAST(ReceivedQty AS decimal)       AS ReceivedQty
      , CAST(RejectedQty AS decimal)       AS RejectedQty
      , CAST(StockedQty AS decimal)        AS StockedQty
-     , CONVERT(DATE, ModifiedDate)        AS ModifiedDate
-     , CONVERT(TIME, ModifiedDate)        AS ModifiedTime
+     , CAST(ModifiedDate AS datetime)     AS ModifiedDate
 FROM cte

@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: production_productsubcategory
+    columns:
+      - name: ProductSubcategoryID
+        description: Tests the ProductSubcategoryID
+        tests:
+          - not_null
+          - unique

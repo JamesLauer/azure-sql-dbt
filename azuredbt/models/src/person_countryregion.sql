@@ -9,8 +9,7 @@ WITH cte AS (SELECT *
              FROM raw_person.countryregion)
 SELECT CAST(CountryRegionCode AS nvarchar(2)) AS CountryRegionCode
      , CAST(Name AS varchar)               AS Name
-     , CONVERT(DATE, ModifiedDate)         AS ModifiedDate
-     , CONVERT(TIME, ModifiedDate)         AS ModifiedTime
+     , CAST(ModifiedDate AS datetime)     AS ModifiedDate
 FROM cte
 
 

@@ -31,6 +31,5 @@ SELECT CAST(ProductID AS int)              AS ProductID
      , CAST(SellEndDate AS datetime)       AS SellEndDate
      , CAST(DiscontinuedDate AS datetime)  AS DiscontinuedDate
      , CAST(rowguid AS uniqueidentifier)   AS rowguid
-     , CONVERT(DATE, ModifiedDate)         AS ModifiedDate
-     , CONVERT(TIME, ModifiedDate)         AS ModifiedTime
+     , CAST(ModifiedDate AS datetime)     AS ModifiedDate
 FROM cte

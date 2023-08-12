@@ -18,6 +18,5 @@ SELECT CAST(SalesOrderID AS int)               AS SalesOrderID
      , CAST(UnitPriceDiscount AS money)        AS UnitPriceDiscount
      , CAST(LineTotal AS money)                AS LineTotal
      , CAST(rowguid AS uniqueidentifier)       AS rowguid
-     , CONVERT(DATE, ModifiedDate)             AS ModifiedDate
-     , CONVERT(TIME, ModifiedDate)             AS ModifiedTime
+     , CAST(ModifiedDate AS datetime)     AS ModifiedDate
 FROM cte

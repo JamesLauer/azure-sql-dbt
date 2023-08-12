@@ -1,7 +1,7 @@
 {
   "json_type_properties": {
-    "schema": "raw_sales",
-    "table": "customer"
+    "schema": "dev_raw",
+    "table": "sales_customer"
   },
   "json_schema": [
     {

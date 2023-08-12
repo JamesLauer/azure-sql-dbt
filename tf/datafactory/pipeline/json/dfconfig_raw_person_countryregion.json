@@ -1,7 +1,7 @@
 {
   "json_type_properties": {
-    "schema": "raw_person",
-    "table": "countryregion"
+    "schema": "dev_raw",
+    "table": "person_countryregion"
   },
   "json_schema": [
     {

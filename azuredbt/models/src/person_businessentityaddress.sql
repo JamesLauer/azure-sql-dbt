@@ -14,6 +14,5 @@ SELECT CAST(BusinessEntityID AS int)     AS BusinessEntityID
      , CAST(AddressID AS int)            AS AddressID
      , CAST(AddressTypeID AS int)        AS AddressTypeID
      , CAST(rowguid AS uniqueidentifier) AS rowguid
-     , CONVERT(DATE, ModifiedDate)       AS ModifiedDate
-     , CONVERT(TIME, ModifiedDate)       AS ModifiedTime
+     , CAST(ModifiedDate AS datetime)     AS ModifiedDate
 FROM cte
