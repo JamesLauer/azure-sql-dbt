@@ -65,6 +65,7 @@ variable "dataset_name" {
     "raw_sales_salesorderdetail",
     "raw_sales_salesorderheader",
     "raw_sales_salesperson",
+    "raw_sales_territory",
     "raw_dates"
   ]
   type = set(string)
