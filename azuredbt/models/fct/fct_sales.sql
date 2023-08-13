@@ -16,7 +16,6 @@
 
 WITH src_salesdetail AS (SELECT SalesOrderID
                               , SalesOrderDetailID
-                              , CarrierTrackingNumber
                               , OrderQty
                               , ProductID
                               , SpecialOfferID
@@ -54,7 +53,6 @@ WITH src_salesdetail AS (SELECT SalesOrderID
 
 SELECT SalesOrderID
      , SalesOrderDetailID
-     , CarrierTrackingNumber
      , OrderQty
      , ProductID
      , SpecialOfferID

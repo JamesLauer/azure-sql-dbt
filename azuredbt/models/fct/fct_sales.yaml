@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: dim_salesdetail
+  - name: fct_sales
     columns:
       - name: "SalesOrderDetailID"
         description: Tests the sales order detail id

@@ -14,7 +14,7 @@ SELECT CAST(StateProvinceID AS int)         AS StateProvinceID
      , CAST(Name AS nvarchar)               AS Name
      , CAST(TerritoryID AS int)             AS TerritoryID
      , CAST(rowguid AS uniqueidentifier)    AS rowguid
-     , CAST(ModifiedDate AS datetime)     AS ModifiedDate
+     , CAST(ModifiedDate AS datetime)       AS ModifiedDate
 FROM cte
 
 

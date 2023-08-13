@@ -1,23 +1,39 @@
 {
   "json_type_properties": {
     "schema": "dev_raw",
-    "table": "sales_customer"
+    "table": "sales_territory"
   },
   "json_schema": [
     {
-      "name": "CustomerID",
-      "type": "nvarchar"
-    },
-    {
-      "name": "PersonID",
-      "type": "nvarchar"
-    },
-    {
-      "name": "StoreID",
-      "type": "nvarchar"
-    },
-    {
       "name": "TerritoryID",
+      "type": "nvarchar"
+    },
+    {
+      "name": "Name",
+      "type": "nvarchar"
+    },
+    {
+      "name": "CountryRegionCode",
+      "type": "nvarchar"
+    },
+    {
+      "name": "Group",
+      "type": "nvarchar"
+    },
+    {
+      "name": "SalesYTD",
+      "type": "nvarchar"
+    },
+    {
+      "name": "SalesLastYear",
+      "type": "nvarchar"
+    },
+    {
+      "name": "CostYTD",
+      "type": "nvarchar"
+    },
+    {
+      "name": "CostLastYear",
       "type": "nvarchar"
     },
     {
@@ -61,16 +77,16 @@
           "tableOption": "autoCreate",
           "disableMetricsCollection": false
         }
-       },
+      },
       "inputs": [
         {
-          "referenceName": "raw_sales_customer",
+          "referenceName": "raw_sales_territory",
           "type": "DatasetReference"
         }
       ],
       "outputs": [
         {
-          "referenceName": "raw_sales_customer_table",
+          "referenceName": "raw_sales_territory_table",
           "type": "DatasetReference"
         }
       ]

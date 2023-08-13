@@ -7,7 +7,7 @@
 )}}
 
 WITH cte AS (SELECT *
-             FROM raw.dates)
+             FROM src_raw.dates)
 SELECT CAST(TheDate AS datetime)         AS TheDate
      , CAST(TheDay AS tinyint)           AS TheDay
      , CAST(TheDayName AS varchar(9))    AS TheDayName

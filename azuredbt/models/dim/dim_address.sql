@@ -10,7 +10,7 @@
     "ALTER TABLE {{ this }} ALTER COLUMN AddressTypeID INT NOT NULL",
     "ALTER TABLE {{ this }} ADD CONSTRAINT FK_dimpersonaddress_personaddresstype FOREIGN KEY (AddressTypeID) REFERENCES dev_src.person_addresstype(AddressTypeID)",
     "ALTER TABLE {{ this }} ALTER COLUMN StateProvinceID INT NOT NULL",
-    "ALTER TABLE {{ this }} ADD CONSTRAINT FK_dimpersonaddress_personstateprovince FOREIGN KEY (StateProvinceID) REFERENCES dev_src.person_stateprovince(StateProvinceID)",
+    "ALTER TABLE {{ this }} ADD CONSTRAINT FK_dimpersonaddress_personstateprovince FOREIGN KEY (StateProvinceID) REFERENCES dev_src.person_stateprovinces(StateProvinceID)",
     "ALTER TABLE {{ this }} ALTER COLUMN CountryRegionCode NVARCHAR(2) NOT NULL",
     "ALTER TABLE {{ this }} ADD CONSTRAINT FK_dimpersonaddress_personcountryregion FOREIGN KEY (CountryRegionCode) REFERENCES dev_src.person_countryregion(CountryRegionCode)",
     ]
@@ -37,7 +37,7 @@ WITH src_businessentityaddress AS (SELECT BusinessEntityID
      src_stateprovince AS (SELECT StateProvinceID   AS spid
                                 , CountryRegionCode AS sprc
                                 , Name              AS State
-                           FROM dev_src.person_stateprovince),
+                           FROM dev_src.person_stateprovinces),
 
      src_countryregion AS (SELECT CountryRegionCode
                                 , Name AS Country

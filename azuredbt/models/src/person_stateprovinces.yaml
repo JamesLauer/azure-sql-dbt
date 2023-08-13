@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: person_stateprovince
+  - name: person_stateprovinces
     columns:
       - name: StateProvinceID
         description: Tests the StateProvinceID

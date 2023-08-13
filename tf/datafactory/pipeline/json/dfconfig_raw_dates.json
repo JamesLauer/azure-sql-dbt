@@ -1,59 +1,47 @@
 {
   "json_type_properties": {
     "schema": "dev_raw",
-    "table": "dates"
+    "table": "sales_territory"
   },
   "json_schema": [
     {
-      "name": "TheDate",
+      "name": "TerritoryID",
       "type": "nvarchar"
     },
     {
-      "name": "TheDay",
+      "name": "Name",
       "type": "nvarchar"
     },
     {
-      "name": "TheDayName",
+      "name": "CountryRegionCode",
       "type": "nvarchar"
     },
     {
-      "name": "TheWeek",
+      "name": "Group",
       "type": "nvarchar"
     },
     {
-      "name": "TheISOWeek",
+      "name": "SalesYTD",
       "type": "nvarchar"
     },
     {
-      "name": "TheDayOfWeek",
+      "name": "SalesLastYear",
       "type": "nvarchar"
     },
     {
-      "name": "TheMonth",
+      "name": "CostYTD",
       "type": "nvarchar"
     },
     {
-      "name": "TheMonthName",
+      "name": "CostLastYear",
       "type": "nvarchar"
     },
     {
-      "name": "TheQuarter",
+      "name": "rowguid",
       "type": "nvarchar"
     },
         {
-      "name": "TheYear",
-      "type": "nvarchar"
-    },
-    {
-      "name": "TheFirstOfMonth",
-      "type": "nvarchar"
-    },
-    {
-      "name": "TheLastOfYear",
-      "type": "nvarchar"
-    },
-    {
-      "name": "TheDayOfYear",
+      "name": "ModifiedDate",
       "type": "nvarchar"
     }
   ],
@@ -92,13 +80,13 @@
       },
       "inputs": [
         {
-          "referenceName": "raw_dates",
+          "referenceName": "raw_sales_territory",
           "type": "DatasetReference"
         }
       ],
       "outputs": [
         {
-          "referenceName": "raw_dates_table",
+          "referenceName": "raw_sales_territory_table",
           "type": "DatasetReference"
             }
           ]
