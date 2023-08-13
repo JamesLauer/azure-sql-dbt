@@ -14,7 +14,8 @@ WITH src_salesperson AS (SELECT BusinessEntityID
                               , CommissionPct
                               , SalesYTD
                               , SalesLastYear
-                         FROM dev_src.sales_salesperson)
+                         FROM dev_src.sales_salesperson),
+    src_salesterritory
 
 SELECT BusinessEntityID
      , AddressID

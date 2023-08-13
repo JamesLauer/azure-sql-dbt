@@ -17,7 +17,7 @@
       "type": "nvarchar"
     },
     {
-      "name": "Group",
+      "name": "TerritoryGroup",
       "type": "nvarchar"
     },
     {

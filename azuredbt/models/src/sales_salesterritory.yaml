@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: sales_salesterritory
+    columns:
+      - name: TerritoryID
+        description: Tests the TerritoryID
+        tests:
+          - not_null
+          - unique
