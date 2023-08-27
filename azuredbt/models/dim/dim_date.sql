@@ -1,14 +1,13 @@
 {{ config(
     post_hook=[
-    "ALTER TABLE {{ this }} ADD DimDateID INT IDENTITY(1,1)",
-    "ALTER TABLE {{ this }} ALTER COLUMN DimDateID INT NOT NULL",
+    "ALTER TABLE {{ this }} ALTER COLUMN DimDateID datetime NOT NULL",
     "ALTER TABLE {{ this }} ADD CONSTRAINT PK_DimDateID PRIMARY KEY (DimDateID)",
     ]
 )}}
 
 WITH cte AS (SELECT *
-             FROM src_raw.dates)
-SELECT CAST(TheDate AS datetime)         AS TheDate
+             FROM dev_raw.dates)
+SELECT CAST(TheDate AS datetime)         AS DimDateID
      , CAST(TheDay AS tinyint)           AS TheDay
      , CAST(TheDayName AS varchar(9))    AS TheDayName
      , CAST(TheWeek AS tinyint)          AS TheWeek

@@ -16,74 +16,58 @@
 
 WITH src_salesdetail AS (SELECT SalesOrderID
                               , SalesOrderDetailID
-                              , OrderQty
                               , ProductID
-                              , SpecialOfferID
-                              , UnitPrice
-                              , UnitPriceDiscount
-                              , LineTotal
                          FROM dev_src.sales_salesorderdetail),
 
      src_salesheader AS (SELECT SalesOrderID AS soid
-                              , RevisionNumber
-                              , OrderDate
-                              , DueDate
-                              , ShipDate
-                              , Status
-                              , OnlineOrderFlag
-                              , SalesOrderNumber
-                              , PurchaseOrderNumber
-                              , AccountNumber
                               , CustomerID
                               , SalesPersonID
                               , TerritoryID
                               , BillToAddressID
                               , ShipToAddressID
-                              , ShipMethodID
-                              , CreditCardID
-                              , CreditCardApprovalCode
-                              , CurrencyRateID
-                              , Comment
+                              , ModifiedDate
                          FROM dev_src.sales_salesorderheader),
 
-     src_customer AS (SELECT CustomerID AS cid
-                           , PersonID
-                           , StoreID
-                      FROM dev_src.sales_customer)
+     dim_customer AS (SELECT DimCustomerID
+                         , CustomerID AS cid
+                         , PersonID
+                         , StoreID
+                    FROM dev_dim.dim_customer),
+
+     dim_address AS (SELECT DimAddressID
+                          , AddressID
+                     FROM dev_dim.dim_address),
+
+     dim_product AS (SELECT DimProductID
+                          , ProductID AS pid
+                     FROM dev_dim.dim_product),
+
+     dim_salesperson AS (SELECT DimSalespersonID
+                              , BusinessEntityID
+                         FROM dev_dim.dim_salesperson),
+
+     dim_date AS (SELECT DimDateID
+                  FROM dev_dim.dim_date)
+
 
 SELECT SalesOrderID
      , SalesOrderDetailID
-     , OrderQty
-     , ProductID
-     , SpecialOfferID
-     , UnitPrice
-     , UnitPriceDiscount
-     , LineTotal
-     , RevisionNumber
-     , OrderDate
-     , DueDate
-     , ShipDate
-     , Status
-     , OnlineOrderFlag
-     , SalesOrderNumber
-     , PurchaseOrderNumber
-     , AccountNumber
-     , CustomerID
-     , PersonID
-     , StoreID
-     , SalesPersonID
-     , TerritoryID
-     , BillToAddressID
-     , ShipToAddressID
-     , ShipMethodID
-     , CreditCardID
-     , CreditCardApprovalCode
-     , CurrencyRateID
-     , Comment
+     , DimCustomerID
+     , DimAddressID
+     , DimProductID
+     , DimSalespersonID
+     , DimDateID
 FROM src_salesdetail
          LEFT JOIN src_salesheader
                    ON src_salesdetail.SalesOrderID = src_salesheader.soid
-         LEFT JOIN src_customer
-                   ON src_salesheader.CustomerID = src_customer.cid
-
-
+         LEFT JOIN dim_customer
+                   ON src_salesheader.CustomerID = dim_customer.cid
+         LEFT JOIN dim_address
+                   ON src_salesheader.BillToAddressID = dim_address.AddressID
+                       AND src_salesheader.ShipToAddressID = dim_address.AddressID
+         LEFT JOIN dim_product
+                   ON src_salesdetail.ProductID = dim_product.pid
+         LEFT JOIN dim_salesperson
+                   ON src_salesheader.SalesPersonID = dim_salesperson.BusinessEntityID
+         LEFT JOIN dim_date
+                   ON src_salesheader.ModifiedDate = dim_date.DimDateID

@@ -3,8 +3,6 @@
     "ALTER TABLE {{ this }} ADD DimAddressID INT IDENTITY(1,1)",
     "ALTER TABLE {{ this }} ALTER COLUMN DimAddressID INT NOT NULL",
     "ALTER TABLE {{ this }} ADD CONSTRAINT PK_DimAddressID PRIMARY KEY (DimAddressID)",
-    "ALTER TABLE {{ this }} ALTER COLUMN BusinessEntityID INT NOT NULL",
-    "ALTER TABLE {{ this }} ADD CONSTRAINT FK_dimpersonaddress_personbusinessentity FOREIGN KEY (BusinessEntityID) REFERENCES dev_src.person_businessentity(BusinessEntityID)",
     "ALTER TABLE {{ this }} ALTER COLUMN AddressID INT NOT NULL",
     "ALTER TABLE {{ this }} ADD CONSTRAINT FK_dimpersonaddress_personaddress FOREIGN KEY (AddressID) REFERENCES dev_src.person_address(AddressID)",
     "ALTER TABLE {{ this }} ALTER COLUMN AddressTypeID INT NOT NULL",

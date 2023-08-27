@@ -2,8 +2,6 @@
     post_hook=[
     "ALTER TABLE {{ this }} ALTER COLUMN AddressID INT NOT NULL",
     "ALTER TABLE {{ this }} ADD CONSTRAINT FK_personbusinessentityaddress_personaddress FOREIGN KEY (AddressID) REFERENCES dev_src.person_address(AddressID)",
-    "ALTER TABLE {{ this }} ALTER COLUMN BusinessEntityID INT NOT NULL",
-    "ALTER TABLE {{ this }} ADD CONSTRAINT FK_personbusinessentityaddress_personbusinessentity FOREIGN KEY (BusinessEntityID) REFERENCES dev_src.person_businessentity(BusinessEntityID)",
     "ALTER TABLE {{ this }} ALTER COLUMN AddressTypeID INT NOT NULL",
     "ALTER TABLE {{ this }} ADD CONSTRAINT FK_personbusinessentityaddress_personaddresstype FOREIGN KEY (AddressTypeID) REFERENCES dev_src.person_addresstype(AddressTypeID)",]
 )}}

@@ -52,7 +52,6 @@ variable "dataset_name" {
   default = [
     "raw_person_address",
     "raw_person_addresstype",
-    "raw_person_businessentity",
     "raw_person_businessentityaddress",
     "raw_person_person",
     "raw_person_stateprovince",
@@ -66,7 +65,8 @@ variable "dataset_name" {
     "raw_sales_salesorderheader",
     "raw_sales_salesperson",
     "raw_sales_territory",
-    "raw_dates"
+    "raw_dates",
+    "raw_test"
   ]
   type = set(string)
 }

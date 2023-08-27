@@ -1,29 +1,29 @@
 {
   "json_type_properties": {
     "schema": "dev_raw",
-    "table": "person_businessentity"
+    "table": "test"
   },
   "json_schema": [
     {
-      "name": "BusinessEntityID",
+      "name": "col1",
       "type": "nvarchar"
     },
     {
-      "name": "rowguid",
+      "name": "col2",
       "type": "nvarchar"
     },
     {
-      "name": "ModifiedDate",
+      "name": "col3",
       "type": "nvarchar"
-    }
-  ],
+    },
+   ],
   "activities_json": [
     {
       "name": "Copy CSV data from Blob Store to SQL Database",
       "type": "Copy",
       "dependsOn": [],
       "policy": {
-        "timeout": "0.01:00:00",
+        "timeout": "0.00:05:00",
         "retry": 0,
         "retryIntervalInSeconds": 30,
         "secureOutput": false,
@@ -52,13 +52,13 @@
       },
       "inputs": [
         {
-          "referenceName": "raw_person_businessentity",
+          "referenceName": "raw_test",
           "type": "DatasetReference"
         }
       ],
       "outputs": [
         {
-          "referenceName": "raw_person_businessentity_table",
+          "referenceName": "raw_test_table",
           "type": "DatasetReference"
         }
       ]

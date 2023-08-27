@@ -48,6 +48,6 @@ SELECT ProductID
      , pcid AS ProductCategoryID
 FROM src_product
          LEFT JOIN src_productsubcategory
-                   ON src_product.ProductSubcategoryID = src_productsubcategory.pcid
+                   ON src_product.ProductSubcategoryID = src_productsubcategory.psid
          LEFT JOIN src_productcategory
                    ON src_productsubcategory.pcid = src_productcategory.ProductCategoryID

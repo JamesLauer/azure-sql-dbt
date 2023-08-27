@@ -1,10 +1,3 @@
-{{ config(
-    post_hook=[
-    "ALTER TABLE {{ this }} ALTER COLUMN BusinessEntityID INT NOT NULL",
-    "ALTER TABLE {{ this }} ADD CONSTRAINT FK_personperson_personbusinessentity FOREIGN KEY (BusinessEntityID) REFERENCES dev_src.person_businessentity(BusinessEntityID)",
-    ]
-)}}
-
 WITH cte AS (SELECT *
              FROM dev_raw.person_person)
 SELECT CAST(BusinessEntityID AS int)      AS BusinessEntityID
