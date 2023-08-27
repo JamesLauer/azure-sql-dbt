@@ -15,7 +15,7 @@
     {
       "name": "col3",
       "type": "nvarchar"
-    },
+    }
    ],
   "activities_json": [
     {
